@@ -1,11 +1,9 @@
-import _3A_UpsSTP_dataStruc as STUC
+import _3_myClass as STUC
 import numpy as np
 import itertools
 import math
 
-# ROOT="new-data/"
-ROOT="new-data/"
-
+ROOT="new-data-russian/2016"
 #来自于算法2生成的切割好的片段
 Sess_dict=np.load(ROOT+"Sess_dict.npy").item(0) #Sess_dict[user id][sess id]=time_list
 #来自于Twitter-LDA生成的话题及概率
@@ -70,7 +68,7 @@ def findTemp(Temp_beta,i,j,tau):
     return K
 
 
-def UpsSTP(uid,beta,Temp_beta,S,S_beta,STP_SUPP_list,min_Count,TI=STUC.TI):
+def UpsSTP(uid,beta,Temp_beta,S,S_beta,STP_SUPP_list,min_Count,TI=[3600*36]):
     #print("strat: ",beta)
     #***1***find all the possible topic in S_beta record in E
     E=findTopic(uid, S, S_beta,beta)
@@ -79,22 +77,21 @@ def UpsSTP(uid,beta,Temp_beta,S,S_beta,STP_SUPP_list,min_Count,TI=STUC.TI):
         gamma=beta.copy()
         gamma.append(int(z))
         gamma_len=len(gamma)
-
         S_gamma={}
         Temp_gamma=[]
         '''key:时间间隔条件   value：'''
         Supp_gamma_tau={}
         for tau in TI:
             Supp_gamma_tau[tau]=[0.0 for i in range(len(list(S.keys())))]
-        '''用于记录出现的次数'''
+
         COUNT = {}
         for tau in TI:
             COUNT[tau] = 0
         # ____________________init1__end____________________________________
-
         '''i表示session的索引号'''
         for i in sorted(list(S_beta.keys())):
             j0=S_beta[i]
+
             # ___________________init2__________________________________________________
             # ***2***find all the dicumenta as instances of z record as <j,pj,tj>
             J = findInstanceList(uid, S[i], j0, z)
@@ -107,7 +104,7 @@ def UpsSTP(uid,beta,Temp_beta,S,S_beta,STP_SUPP_list,min_Count,TI=STUC.TI):
                 p_j2=0
                 P=0
 
-                for j in J: #j[0]=pos,j[1]=prob,j[-1]=time
+                for j in J:     # j[0]=pos,j[1]=prob,j[-1]=time
                     #_____if gamma_is_not_the_first_topic______________________________________________________
                     if len(Temp_beta):  #if Temp_beta is not empty
                         #***3***find all the temp(sorted) which can be merge record in K
@@ -138,8 +135,9 @@ def UpsSTP(uid,beta,Temp_beta,S,S_beta,STP_SUPP_list,min_Count,TI=STUC.TI):
                 #end for j in J
                 #此处P是每个session中的概率
                 if P > 0.0:
-                    # Supp_gamma_tau[tau]+=P
-                    Supp_gamma_tau[tau][i]+= math.pow(P,1/gamma_len)
+                    # print(Supp_gamma_tau,P)
+                    Supp_gamma_tau[tau][i]+=P
+                    # Supp_gamma_tau[tau][i]+= math.pow(P,1/gamma_len)
                     #用于标记带有周期性的模式
                     COUNT[tau]+=1
 
@@ -150,9 +148,10 @@ def UpsSTP(uid,beta,Temp_beta,S,S_beta,STP_SUPP_list,min_Count,TI=STUC.TI):
         '''
         过滤掉长度小于2 以及 支持度为0的模式
         '''
-        if gamma_len >= 3:
+        if gamma_len >= 2:
             for tau in TI:
                 average=sum(Supp_gamma_tau[tau]) / len(list(S.keys()))
+                average = math.pow(average, 1 / gamma_len)
                 if average > 0.0 and COUNT[tau] >= min_Count:
                     STP_SUPP_list.append( STUC.STP_Supp(ldaStr=tuple(gamma),tau=tau,prob_list=Supp_gamma_tau[tau],supp=average,l=gamma_len,
                                                        contain=tuple([tuple(gamma)])) )
@@ -165,7 +164,7 @@ def UpsSTP(uid,beta,Temp_beta,S,S_beta,STP_SUPP_list,min_Count,TI=STUC.TI):
 def run_oneUser_TISTP(userID):
     time_list=list(LDA_dict[userID].keys())
     if len(time_list) <= 0 :
-        print("error: run_oneUser_TUSTP timelist is empty",userID)
+        print("error: run_oneUser_TUSTP timelist is empty")
         exit(0)
 
     global Sess_dict
@@ -174,19 +173,17 @@ def run_oneUser_TISTP(userID):
     Temp_beta = []          # Temp is a list, Temp[i]=class Temp{sessID,pos,prob,time}
     S = Sess_dict[userID]   # Session is a dict; key=sess id; value=time_list
     S_beta = {}             # suffix is a dict; key=sess id; value=position;
-
     for ind in sorted(list(S.keys())):
         S_beta[ind] = -1
 
-    # 结果都保留在了STP_Supp_list里面
-    UpsSTP(userID, beta, Temp_beta, S, S_beta, STP_Supp_list, min_Count=1)
-    np.save(ROOT+"User_TISTP/STPSUPP_dict_%s.npy" % (userID), STP_Supp_list)
-    print("_________", userID, "_____________:",len(STP_Supp_list), "end")
+    UpsSTP(userID, beta, Temp_beta, S, S_beta, STP_Supp_list,min_Count=2)
+    np.save(ROOT+"User_STP_/STPSUPP_dict_%s.npy" % (userID), STP_Supp_list)
+    print("_________", userID, "_____________:", len(STP_Supp_list), "end")
 
 
 if __name__ =='__main__':
     uid_list=sorted(list(Sess_dict.keys()))
-    uid_list.reverse()
+
     #使用多进程并发执行(多用户并行)
     import multiprocessing
     pool = multiprocessing.Pool(min([multiprocessing.cpu_count(),3]))

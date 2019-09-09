@@ -15,16 +15,14 @@ TI=[aHour*1,aHour*3,aHour*6]
 # TI=[aHour*24]
 # TI=[2,3,4,5,6,7,100]
 
-
-class Prefix:
-    def __init__(self,tau,i,j,k,p):
-        self.sessID = i
+class Prefix_CTP:
+    def __init__(self,tau,time_start,time_end,prob):
         self.tau=tau
-        self.next_pos=j
-        self.pos=k
-        self.prob=p
-
-
+        # self.pos_start=pos_start
+        # self.pos_end=pos_end
+        self.time_start=time_start
+        self.time_end=time_end
+        self.prob = prob
 
 class Temp:
     def __init__(self,i,tau,pos,prob,time,oriProb):
