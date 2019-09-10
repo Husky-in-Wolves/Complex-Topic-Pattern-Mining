@@ -87,7 +87,7 @@ def TICTP(uid,alpha,S_len,R_alpha,S_alpha,STP_SUPP_list,min_Count,TI=STUC.TI):
             for tau in TI:
                 if len(Supp_beta[tau].values()) >= min_Count:
                     support = sum(Supp_beta[tau].values()) / S_len
-                    STP_SUPP_list.append(STUC.STP_Supp(ldaStr=tuple(beta), tau=tau, prob_list=Supp_beta, supp=support, l=beta_len, contain=tuple([tuple(beta)])))
+                    STP_SUPP_list.append(STUC.STP_Supp(ldaStr=tuple(beta), tau=tau, prob_list=Supp_beta[tau].values(), supp=support, l=beta_len, contain=tuple([tuple(beta)])))
         if beta_len < 4 and max([len(Supp_beta[tau].values()) for tau in TI]) >= min_Count:
             TICTP(uid=uid, alpha=beta, S_len=S_len, R_alpha=R_beta, S_alpha=S_beta, STP_SUPP_list=STP_SUPP_list,min_Count=min_Count)
         #_________________end___result_and_interial_________________________________

@@ -24,15 +24,12 @@ class Prefix_CTP:
         self.time_end=time_end
         self.prob = prob
 
-class Temp:
-    def __init__(self,i,tau,pos,prob,time,oriProb):
-        self.sessID=i
+class Prefix_STP:
+    def __init__(self,tau,pos,prob,time):
         self.tau=tau
         self.pos=pos
         self.prob=prob
         self.time=time
-        self.oriProb=oriProb
-
 
 
 class STP_Supp:
