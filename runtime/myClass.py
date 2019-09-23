@@ -23,9 +23,14 @@ class Prefix_STP:
 class Prefix_CTP:
     def __init__(self,tau,time_start,time_end,prob):
         self.tau=tau
-        # self.pos_start=pos_start
-        # self.pos_end=pos_end
         self.time_start=time_start
+        self.time_end=time_end
+        self.prob = prob
+
+class Prefix_ILV:
+    def __init__(self,tau,pattern_start_dict,time_end,prob):
+        self.tau=tau
+        self.pattern_start_dict=pattern_start_dict
         self.time_end=time_end
         self.prob = prob
 
