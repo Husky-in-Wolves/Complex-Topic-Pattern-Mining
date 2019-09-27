@@ -57,8 +57,8 @@ def run_one_tau(in_path, out_path, tau):
     print("start the ", tau, time.time())
     for file in os.listdir(in_path):
         sub_path, save_path = os.path.join(in_path, file), os.path.join(out_path, file)
-        file_path_1 = sub_path + "/STP_MAT_%s.npy" % (tau)
-        file_path_2 = sub_path + "/STP_dict_%s.npy" % (tau)
+        file_path_1 = sub_path + "/TP_MAT_%s.npy" % (tau)
+        file_path_2 = sub_path + "/TP_dict_%s.npy" % (tau)
         file_path_3 = sub_path + "/global_supp_%s.npy" % (tau)
         if not os.path.exists(save_path):
             os.makedirs(save_path)

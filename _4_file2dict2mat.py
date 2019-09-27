@@ -84,8 +84,8 @@ if __name__ == '__main__':
     ''' the mined CTPs (sequential) (min_count=2) for each user is stored in User/TISEQ_2 '''
     ''' the mined CTPs (interleaving) (min_count=2) for each user is stored in User/TIILV '''
     ''' the mined STPs (min_count=2) for each user is stored in User/STP '''
-    List_ = [(os.path.join(ROOT,"User/TISEQ_2"), os.path.join(ROOT, "CTP/TISEQ")),
-             (os.path.join(ROOT,"User/TIILV"), os.path.join(ROOT, "CTP/TIILV")),
+    List_ = [(os.path.join(ROOT,"User/TISEQ_2"), os.path.join(ROOT, "CTP/SEQ")),
+             (os.path.join(ROOT,"User/TIILV"), os.path.join(ROOT, "CTP/ILV")),
              (os.path.join(ROOT,"User/STP"), os.path.join(ROOT, "CTP/STP"))]
 
     pool = multiprocessing.Pool(len(TI))
