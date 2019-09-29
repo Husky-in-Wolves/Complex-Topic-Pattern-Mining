@@ -3,7 +3,36 @@ A new set of topic-based patterns, named Complex Topic Patterns (CTPs), by exten
 
 ## Main Data Source ##
 The raw data has been processed into several user-level message sequence databases, and the global one is separated and stored into three files: Sess_dict.npy, LDA_dict.npy, and Prob_dict.npy.
+
+   <table>
+        <tr>
+            <th>设备</th>
+            <th>设备文件名</th>
+            <th>文件描述符</th>
+            <th>类型</th>
+        </tr>
+        <tr>
+            <th>键盘</th>
+            <th>/dev/stdin</th>
+            <th>0</th>
+            <th>标准输入</th>
+        </tr>
+        <tr>
+            <th>显示器</th>
+            <th>/dev/stdout</th>
+            <th>1</th>
+            <th>标准输出</th>
+        </tr>
+        <tr>
+            <th>显示器</th>
+            <th>/dev/stderr</th>
+            <th>2</th>
+            <th>标准错误输出</th>
+        </tr>
+    </table>
+
 |file         |key_1        |key_2        |value                                  |
+
 |Sess_dict.npy|user id      |session id   |a series of time-stampes               |
 |LDA_dict.npy |user id      |time-stamp   |a set of topic categories              |
 |Prob_dict.npy|user id      |time-stamp   |the coorespoding set of probabilities  |
