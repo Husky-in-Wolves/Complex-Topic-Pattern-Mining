@@ -31,8 +31,8 @@ The raw data has been processed into several user-level message sequence databas
             <th>mining sequential patterns which are not constrained by time-intervals.</th>
         </tr>
         <tr>
-            <th>_3B_CTP_SEQMining_Algo.py</th>  
-            <th>mining sequential patterns which satisfy one(or more than one) time-interval constraint(s).</th>
+            <th align="left">_3B_CTP_SEQMining_Algo.py</th>  
+            <th align="left">mining sequential patterns which satisfy one(or more than one) time-interval constraint(s).</th>
         </tr>
         <tr>
             <th>_3C_CTP_ILVMining_Algo.py</th>  
