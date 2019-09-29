@@ -20,7 +20,8 @@ The raw data has been processed into several user-level message sequence databas
 
 
 ## Mining Algorithms ##
-Two novel algorithms for mining CTPs and calculating their support values, interval-enhanced and patternset-interval-enhanced DP process, are described in '_3B_CTP_SEQMining_Algo.py' and '_3C_CTP_ILVMining_Algo.py' in detail, whereas '_3A_STP_STPMining_Algo.py'  describe the baseline algorithm for mining classical sequential patterns. Besides that, the following algorithms are designed for user-aware rarity analysis and cross filtering.  
+Two novel algorithms for mining CTPs and calculating their support values, interval-enhanced and patternset-interval-enhanced DP process, are described in '_3B_CTP_SEQMining_Algo.py' and '_3C_CTP_ILVMining_Algo.py' in detail, whereas '_3A_STP_STPMining_Algo.py'  describe the baseline algorithm for mining classical sequential patterns.  
+Besides that, the following algorithms are designed for user-aware rarity analysis and cross filtering.  
 The execution order of mining algorithms refers to the file names.
 <table>
         <tr>
