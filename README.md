@@ -20,7 +20,8 @@ The raw data has been processed into several user-level message sequence databas
 
 
 ## Mining Algorithms ##
-
+Two novel algorithms for mining CTPs and calculating their support values, interval-enhanced and patternset-interval-enhanced DP process, are described in '_3B_CTP_SEQMining_Algo.py' and '_3C_CTP_ILVMining_Algo.py' in detail, whereas '_3A_STP_STPMining_Algo.py'  describe the baseline algorithm for mining classical sequential patterns. Besides that, the following algorithms are designed for user-aware rarity analysis and cross filtering.
+The execution order of mining algorithms refers to the file names.
 <table>
         <tr>
             <th>algorithm</th>
@@ -43,11 +44,11 @@ The raw data has been processed into several user-level message sequence databas
             <th align="left">integrating all user-pattern pairs stored in different files into a big matrix.</th>
         </tr>
         <tr>
-            <th align="left">_6A_gridSearch.py</th>  
+            <th align="left">_5_getURR.py</th>  
             <th align="left">calculating the index of user-aware rarity, including global support, absolute rarity, and relative rarity.</th>
         </tr>
         <tr>
-            <th align="left">_5_getURR.py</th>  
+            <th align="left">_6A_gridSearch.py</th>  
             <th align="left">get URSEQs and URILVs.</th>
         </tr>
         <tr>
@@ -55,11 +56,7 @@ The raw data has been processed into several user-level message sequence databas
             <th align="left">get URCTPs.</th>
         </tr>
 </table>
-The execution order of mining algorithms refers to the file names.
 
-
-
-## Running Time Test ##
 
 
 
