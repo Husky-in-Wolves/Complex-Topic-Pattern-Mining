@@ -1,5 +1,5 @@
 # Complex Topic Pattern Mining #
-A new set of topic-based patterns, named Complex Topic Patterns (CTPs), by extending Sequential Topic Patterns (STPs) with time-interval constraints and the interleaving operator. The p
+A new set of topic-based patterns, named Complex Topic Patterns (CTPs), by extending Sequential Topic Patterns (STPs) with time-interval constraints and the interleaving operator. The purpose of proposing CTPs is to discover users with special intentions on public social platforms on the Internet, especially, to detect Russian trolls in Twitter.
 
 ## Main Data Source ##
 The raw data has been processed into several user-level message sequence databases, and the global one is separated and stored into three files: Sess_dict.npy, LDA_dict.npy, and Prob_dict.npy.
@@ -20,7 +20,8 @@ The raw data has been processed into several user-level message sequence databas
 
 
 ## Mining Algorithms ##
-Two novel algorithms for mining CTPs, interval-enhanced and patternset-interval-enhanced DP process, are described in "_3B_CTP_SEQMining_Algo.py" and "_3C_CTP_ILVMining_Algo.py" in detail, whereas "_3A_STP_STPMining_Algo.py" describe the baseline algorithm for mining classical sequential patterns.  
+Two novel algorithms for mining CTPs, interval-enhanced and patternset-interval-enhanced DP process, are described in "_3B_CTP_SEQMining_Algo.py" and "_3C_CTP_ILVMining_Algo.py" in detail,  
+whereas "_3A_STP_STPMining_Algo.py" describe the baseline algorithm for mining classical sequential patterns.  
 Besides that, the following algorithms are designed for user-aware rarity analysis and cross filtering.  
   
 The execution order of mining algorithms refers to the file names.
